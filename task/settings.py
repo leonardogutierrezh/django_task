@@ -1,5 +1,15 @@
 # Django settings for task project.
+# Identificando la ruta del proyecto
+import os
 
+RUTA_PROYECTO = os.path.dirname(os.path.realpath(__file__))
+_ruta_db = RUTA_PROYECTO.split("/")
+_ruta_db = _ruta_db[0:len(_ruta_db)-2] + ["base","base.db"]
+_ruta_db = "/".join(_ruta_db)
+
+_ruta_static = RUTA_PROYECTO.split("/")
+_ruta_static = _ruta_static[0:len(_ruta_static)-2] + ["recipe","static"]
+_ruta_static = "/".join(_ruta_static)
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -11,8 +21,8 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '',                      # Or path to database file if using sqlite3.
+        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': '_ruta_db',                      # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
         'USER': '',
         'PASSWORD': '',
@@ -107,7 +117,7 @@ ROOT_URLCONF = 'task.urls'
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'task.wsgi.application'
 
-TEMPLATE_DIRS = (
+TEMPLATE_DIRS = ( os.path.join(RUTA_PROYECTO,'templates' ),
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -121,9 +131,10 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
-    # 'django.contrib.admin',
+    'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
-    # 'django.contrib.admindocs',
+    'django.contrib.admindocs',
+    'to_do',
 )
 
 # A sample logging configuration. The only tangible logging

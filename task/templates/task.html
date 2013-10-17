@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<form id='formulario' method='post' action=''>{% csrf_token %}
+<table border="1" style="border: 1px solid black;" width="100%">
+<th>Hora</th>
+<th>fecha</th>
+<th>Cliente</th>
+<th>Contacto</th>
+<th>Telefono</th>
+<th>Email</th>
+<th>Tarea</th>
+<th>Asignación</th>
+<th>Notas</th>
+<th>Estado</th>
+    {% for task in taskCulminado %}
+ <tr style="{%if task.estato == 'Urgente' %}background-color: red{% elif task.estato == 'Culminado'%}background-color: blue;{%elif task.estato == 'En Proceso'%}background-color: green{%elif task.estato == 'Pausado'%}background-color: yellow{%endif%}">
+<td>{{task.hora}}</td>
+<td>{{task.fecha}}</td>
+<td>{{task.cliente}}</td>
+<td>{{task.contacto}}</td>
+<td>{{task.telefono}}</td>
+<td>{{task.email}}</td>
+<td>{{task.tarea}}</td>
+<td>{{task.usuario}}</td>
+<td>{{task.notas}}</td>
+<td><select name='estado'>
+    <option value="{{task.id}}_{{task.estado}}">{{task.estato}}</option>
+    <option value="{{task.id}}_Urgente">Urgente</option>
+    <option value="{{task.id}}_Culminado">Culminado</option>
+    <option value="{{task.id}}_En Proceso">En Proceso</option>
+    <option value="{{task.id}}_Pausado">Pausado</option>
+</select></td>
+</tr>
+
+{% endfor %}
+{% for task in tasks %}
+ <tr style="{%if task.estato == 'Urgente' %}background-color: red{% elif task.estato == 'Culminado'%}background-color: blue;{%elif task.estato == 'En Proceso'%}background-color: green{%elif task.estato == 'Pausado'%}background-color: yellow{%endif%}">
+<td>{{task.hora}}</td>
+<td>{{task.fecha}}</td>
+<td>{{task.cliente}}</td>
+<td>{{task.contacto}}</td>
+<td>{{task.telefono}}</td>
+<td>{{task.email}}</td>
+<td>{{task.tarea}}</td>
+<td>{{task.usuario}}</td>
+<td>{{task.notas}}</td>
+<td><select name='estado'>
+    <option value="{{task.id}}_{{task.estado}}">{{task.estato}}</option>
+    <option value="{{task.id}}_Urgente">Urgente</option>
+    <option value="{{task.id}}_Culminado">Culminado</option>
+    <option value="{{task.id}}_En Proceso">En Proceso</option>
+    <option value="{{task.id}}_Pausado">Pausado</option>
+</select></td>
+</tr>
+
+{% endfor %}
+    </table>
+<input type='submit' value='Guardar' />
+</form>
+
+</body>
+</html>
